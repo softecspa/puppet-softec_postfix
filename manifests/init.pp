@@ -27,7 +27,7 @@ class softec_postfix (
 
   if $softec_postfix::relay {
     postfix::postconf {'relayhost':
-      value   => $softec_postfix::smtp_relay_host,
+      value   => $softec_postfix::relay_host,
       require => Package[$postfix::package],
       notify  => Service[$postfix::service]
     }
