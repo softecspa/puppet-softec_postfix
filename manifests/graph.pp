@@ -5,17 +5,17 @@ class softec_postfix::graph (
 ) inherits softec_postfix::params {
 
   package {$softec_postfix::graph::graph_packages:
-    ensure  => "present",
-    require => [ Package["rrdtool"] ]
+    ensure  => 'present',
+    require => [ Package['rrdtool'] ]
   } ->
 
-  file { "/etc/default/mailgraph":
+  file { '/etc/default/mailgraph':
     ensure  => present,
-    mode    => "644",
-    owner   => "root",
-    group   => "root",
-    content => template("softec_postfix/mailgraph.erb"),
-    notify  => Service["mailgraph"],
+    mode    => '0644',
+    owner   => 'root',
+    group   => 'root',
+    content => template('softec_postfix/mailgraph.erb'),
+    notify  => Service['mailgraph'],
   } ->
 
   service { 'mailgraph':
@@ -36,7 +36,7 @@ class softec_postfix::graph (
 
   cron::entry {'queuegraph':
     frequency => 'frequently',
-    user => 'root',
-    command => 'test -x /usr/share/queuegraph/count.sh && /usr/share/queuegraph/count.sh >/dev/null 2>&1',
+    user      => 'root',
+    command   => 'test -x /usr/share/queuegraph/count.sh && /usr/share/queuegraph/count.sh >/dev/null 2>&1',
   }
 }

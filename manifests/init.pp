@@ -39,7 +39,7 @@ class softec_postfix (
   }
 
   augeas { 'mailname':
-    context => "/files/etc/mailname",
+    context => '/files/etc/mailname',
     changes => "set hostname '$mailname_content'",
     notify  => Service[$postfix::service],
   }
@@ -51,7 +51,7 @@ class softec_postfix (
 
     file { '/etc/postfix/generic':
       ensure  => present,
-      mode    => 644,
+      mode    => '0644',
       owner   => root,
       group   => root,
       require => Package[$postfix::package],
@@ -69,7 +69,7 @@ class softec_postfix (
   $aliases_hash = merge({'root' => $softec_postfix::root_alias},$softec_postfix::aliases)
 
   class {'postfix::aliases':
-    maps  => $aliases_hash
+    maps  => $softec_postfix::aliases_hash
   }
 
   class {'softec_postfix::logrotate':
