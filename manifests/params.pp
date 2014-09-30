@@ -17,4 +17,5 @@ class softec_postfix::params {
   $maillog                = '/var/log/mail.log'
   $graph_packages         = [ 'mailgraph' , 'queuegraph' ]
   $mailgraph_pid          = "/var/run/mailgraph.pid"
+  $monitoring             = true
 }

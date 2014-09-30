@@ -14,7 +14,10 @@ class softec_postfix (
   $logrotate_create_group = params_lookup( 'logrotate_create_group' ),
   $logrotate_create_mode  = params_lookup( 'logrotate_create_mode' ),
   $graph                  = params_lookup( 'graph' ),
+  $monitoring             = params_lookup( 'monitoring' ),
 )inherits softec_postfix::params {
+
+  validate_bool($monitoring)
 
   class {'postfix':}
 
@@ -84,4 +87,9 @@ class softec_postfix (
   if $softec_postfix::graph {
     include softec_postfix::graph
   }
+
+  if $softec_postfix::monitoring {
+    include softec_postfix::monitoring
+  }
+
 }
