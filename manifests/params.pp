@@ -5,7 +5,7 @@ class softec_postfix::params {
   $rewrite_domain         = 'softecpa.it'
   $relay_host             = $::smtp_relay_host
   $root_alias             = $::notifyemail
-  $aliases                = {}
+  $aliases                = { 'postmaster' => 'root', 'nobody' => 'root', }
   $prepend_hostname       = true
   $logrotate_olddir_owner = 'root'
   $logrotate_olddir_group = 'adm'
